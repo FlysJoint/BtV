@@ -11,6 +11,8 @@
 
 map = []
 global current_room
+global moves
+moves = 0
 
 class Room(object):
     tunnels = []
@@ -23,9 +25,9 @@ class Room(object):
 
     def describe(self):
         print("\033[H\033[J") 
-        print(self.pos)
-        print(self.description)
-        # print('There are exits: %s' % self.exits)
+        debug()
+        # print(self.pos)
+        print('You are in the %s. %s' % (self.name, self.description))
         prompt()
 
 
@@ -37,6 +39,9 @@ def prompt():
 
 def action(my_action):
     global current_room
+    global moves
+    moves += 1
+    debug()
     if my_action in current_room.exits:
         print('going %s from %s...' % (my_action, current_room.name))
         if my_action == 'west':
@@ -53,6 +58,11 @@ def action(my_action):
         print('That is not a valid direction')
         prompt()
 
+def debug():
+    global moves
+    global current_room
+    print('Moves: %s, Pos: %s, Room: %s\n' % (str(moves), str(current_room.pos), current_room.name))
+
 
 def find_room(x, y):
     global current_room
@@ -62,6 +72,10 @@ def find_room(x, y):
         current_room = library
     elif x == 1 and y == 1:
         current_room = north_corridor
+    elif x == 0 and y == 1:
+        current_room = northwest_corridor
+    elif x == 0 and y == 2:
+        current_room = basement
     else:
         print('Trying to find x:%s, y:%s' % (x, y))
     print('moving to: ' + current_room.name)
@@ -70,23 +84,37 @@ def find_room(x, y):
 
 library = Room(
     'Library',
-    'You are in the library. Bookcases and bookcases of ancient, arcane texts line the walls.',
+    'Bookcases and bookcases of ancient, arcane texts line the walls.',
     ['west', 'south'],
     [1, 0]
     )
 
 stacks = Room(
     'Stacks',
-    'You are in the stacks. Piles of musty tomes tower above you.',
+    'Piles of musty tomes tower above you.',
     ['east'],
     [0, 0]
     )
 
 north_corridor = Room(
     'North Corridor',
-    'You are in the North Corridor. Students hustle and bustle on their way to class',
+    'Students hustle and bustle on their way to class',
     ['north', 'west', 'east', 'south'],
     [1, 1]
+)
+
+northwest_corridor = Room(
+    'Northwest Corridor',
+    'Students hustle and bustle on their way to class',
+    ['east', 'south'],
+    [0, 1]
+)
+
+basement= Room(
+    'Basement',
+    'Drips echo off rusty metal pipes. You can hear a rat scurrying. Amy?',
+    ['north'],
+    [0, 2]
 )
 
 find_room(1, 0)
