@@ -89,22 +89,38 @@ def find_room(x, y):
         current_room = northeast_corridor
     elif x == 3 and y == 1:
         current_room = sports_field
+    elif x == 4 and y == 1:
+        current_room = street_8
     elif x == 0 and y == 2:
         current_room = basement
     elif x == 1 and y == 2:
         current_room = lockers
     elif x == 2 and y == 2:
         current_room = restroom
+    elif x == 3 and y == 2:
+        current_room = giles_house
+    elif x == 4 and y == 2:
+        current_room = street_7
     elif x == 0 and y == 3:
         current_room = principal_office
     elif x == 1 and y == 3:
         current_room = south_corridor
     elif x == 2 and y == 3:
         current_room = computer_room
+    elif x == 3 and y == 3:
+        current_room = magic_shop
+    elif x == 4 and y == 3:
+        current_room = street_6
     elif x == 0 and y == 4:
         current_room = buffy_house
     elif x == 1 and y == 4:
         current_room = street_2
+    elif x == 2 and y == 4:
+        current_room = street_3
+    elif x == 3 and y == 4:
+        current_room = street_4
+    elif x == 4 and y == 4:
+        current_room = street_5
     elif x == 0 and y == 5:
         current_room = willow_house
     elif x == 1 and y == 5:
@@ -113,6 +129,8 @@ def find_room(x, y):
         current_room = graveyard
     elif x == 3 and y == 5:
         current_room = tomb
+    elif x == 4 and y == 5:
+        current_room = angel_house
     else:
         print('Trying to find x:%s, y:%s' % (x, y))
     print('moving to: ' + current_room.name)
@@ -137,132 +155,195 @@ cafeteria = Room(
     'The stench of stale mashed potato hangs heavy in the air.',
     ['south'],
     [2, 0]
-)
-
-north_corridor = Room(
-    'North Corridor',
-    'Students hustle and bustle on their way to class',
-    ['north', 'west', 'east', 'south'],
-    [1, 1]
-)
-
-northwest_corridor = Room(
-    'Northwest Corridor',
-    'Students hustle and bustle on their way to class',
-    ['east', 'south'],
-    [0, 1]
-)
-
-northeast_corridor = Room(
-    'Northeast Corridor',
-    'Students hustle and bustle on their way to class',
-    ['east', 'south', 'north', 'west'],
-    [2, 1]
-)
-
-basement = Room(
-    'Basement',
-    'Drips echo off rusty metal pipes. You can hear a rat scurrying. Amy?',
-    ['north'],
-    [0, 2]
-)
-
-restroom = Room(
-    'Restroom',
-    'A long mirror reflects the broken cubicles opposite. Some students giggle as you enter and run out.',
-    ['north'],
-    [2, 2]
-)
-
-sports_field = Room(
-    'Sports Field',
-    'Jocks run plays while cheerleaders dance their acrobatic routines',
-    ['north', 'west', 'east'],
-    [3, 1]
-)
+    )
 
 bleachers = Room(
     'Bleachers',
     'Sicknotes watch on as the athletes run laps',
     ['south'],
     [3, 0]
-)
+    )
 
 bronze = Room(
     'Bronze',
     'Indie bands rock out to the tune of pool balls being sunk and drinks being drunk',
     ['south'],
     [4, 0]
-)
+    )
+
+northwest_corridor = Room(
+    'Northwest Corridor',
+    'Students hustle and bustle on their way to class',
+    ['east', 'south'],
+    [0, 1]
+    )
+
+north_corridor = Room(
+    'North Corridor',
+    'Students hustle and bustle on their way to class',
+    ['north', 'west', 'east', 'south'],
+    [1, 1]
+    )
+
+northeast_corridor = Room(
+    'Northeast Corridor',
+    'Students hustle and bustle on their way to class',
+    ['east', 'south', 'north', 'west'],
+    [2, 1]
+    )
+
+sports_field = Room(
+    'Sports Field',
+    'Jocks run plays while cheerleaders dance their acrobatic routines',
+    ['north', 'west', 'east'],
+    [3, 1]
+    )
+
+street_8 = Room(
+    'Street',
+    'STREET DESCRIPTION',
+    ['south', 'west', 'north'],
+    [4, 1]
+    )
+
+basement = Room(
+    'Basement',
+    'Drips echo off rusty metal pipes. You can hear a rat scurrying. Amy?',
+    ['north'],
+    [0, 2]
+    )
 
 lockers = Room(
     'Lockers',
     'Locker doors slam open and shut, a constant cacophony of clamour',
     ['south', 'north'],
     [1, 2]
-)
+    )
 
-south_corridor = Room(
-    'South Corridor',
-    'Students hustle and bustle on their way to class',
-    ['east', 'south', 'north', 'west'],
-    [1, 3]
-)
+restroom = Room(
+    'Restroom',
+    'A long mirror reflects the broken cubicles opposite. Some students giggle as you enter and run out.',
+    ['north'],
+    [2, 2]
+    )
+
+giles_house = Room(
+    'house of Giles',
+    'The house is filled with armour, weapons and books from long ago. And an awful lot of tea.',
+    ['east'],
+    [3, 2]
+    )
+
+street_7 = Room(
+    'Street',
+    'STREET DESCRIPTION',
+    ['south', 'west', 'north'],
+    [4, 2]
+    )
 
 principal_office = Room(
     'Principal\'s Office',
     'The throne room of the most evil demon of them all.',
     ['east'],
     [0, 3]
-)
+    )
+
+south_corridor = Room(
+    'South Corridor',
+    'Students hustle and bustle on their way to class',
+    ['east', 'south', 'north', 'west'],
+    [1, 3]
+    )
 
 computer_room = Room(
     'Computer Room',
-    'Beeps and boops can be heard over the noise of blistering 14.4 modems',
+    'Beeps and boops can be heard over the noise of blisteringly fast 14.4 modems',
     ['west'],
     [2, 3]
-)
+    )
 
-street_2 = Room(
+magic_shop = Room(
+    'Magic Box',
+    'Strange things in jars, strange smells from boxes, strange noises from books. Strange.',
+    ['south'],
+    [3, 3]
+    )
+
+street_6 = Room(
     'Street',
-    'Students in various 90s fashions troop in and out of the high school entrance..',
-    ['east', 'north', 'south'],
-    [1, 4]
-)
-
-street_1 = Room(
-    'Street',
-    'Suburban houses gradually give way in style to more gothic buildings.',
-    ['east', 'north', 'west'],
-    [1, 5]
-)
-
-willow_house = Room(
-    'house of Willow',
-    'Downstairs it looks like a typical Jewish family home, but upstairs there is a heavy Wicca influence.',
-    ['east', 'north'],
-    [0, 5]
-)
+    'STREET DESCRIPTION',
+    ['south', 'north'],
+    [4, 3]
+    )
 
 buffy_house = Room(
     'house of Buffy',
     'Strange art adorns the walls inside and a thin layer of dust covers the garden.',
     ['south'],
     [1, 4]
-)
+    )
+
+street_2 = Room(
+    'Street',
+    'Students in various 90s fashions troop in and out of the high school entrance..',
+    ['east', 'north', 'south'],
+    [1, 4]
+    )
+
+street_3 = Room(
+    'Street',
+    'Abandoned buildings and lonely car parks compound the desolation.',
+    ['east', 'west'],
+    [2, 4]
+    )
+
+street_4 = Room(
+    'Street',
+    'Clothes shops, a costume shop and more clothes shops. Cordelia would be very happy.',
+    ['east', 'west', 'north'],
+    [3, 4]
+    )
+
+street_5 = Room(
+    'Street',
+    'STREET DESCRIPTION',
+    ['south', 'west', 'north'],
+    [4, 4]
+    )
+
+willow_house = Room(
+    'house of Willow',
+    'Downstairs it looks like a typical Jewish family home, but upstairs there is a heavy Wicca influence.',
+    ['east', 'north'],
+    [0, 5]
+    )
+
+street_1 = Room(
+    'Street',
+    'Suburban houses gradually give way in style to more gothic buildings.',
+    ['east', 'north', 'west'],
+    [1, 5]
+    )
 
 graveyard = Room(
     'Graveyard',
     'Unkempt tombstones protrude from the ground like negelected teeth.',
     ['east', 'west'],
     [2, 5]
-)
+    )
 
 tomb = Room(
     'Tomb',
     'Oil lamps illuminate a small chamber decorated by vases and morbid artefacts.',
     ['west'],
     [3, 5]
-)
+    )
+
+angel_house = Room(
+    'house of Angel',
+    'There are no mirrors, a lot of art and large curtains and he really needs to sweep these leaves away.',
+    ['north'],
+    [4, 5]
+    )
 
 find_room(1, 0)
