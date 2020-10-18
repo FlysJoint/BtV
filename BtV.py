@@ -101,6 +101,18 @@ def find_room(x, y):
         current_room = south_corridor
     elif x == 2 and y == 3:
         current_room = computer_room
+    elif x == 0 and y == 4:
+        current_room = buffy_house
+    elif x == 1 and y == 4:
+        current_room = street_2
+    elif x == 0 and y == 5:
+        current_room = willow_house
+    elif x == 1 and y == 5:
+        current_room = street_1
+    elif x == 2 and y == 5:
+        current_room = graveyard
+    elif x == 3 and y == 5:
+        current_room = tomb
     else:
         print('Trying to find x:%s, y:%s' % (x, y))
     print('moving to: ' + current_room.name)
@@ -209,6 +221,48 @@ computer_room = Room(
     'Beeps and boops can be heard over the noise of blistering 14.4 modems',
     ['west'],
     [2, 3]
+)
+
+street_2 = Room(
+    'Street',
+    'Students in various 90s fashions troop in and out of the high school entrance..',
+    ['east', 'north', 'south'],
+    [1, 4]
+)
+
+street_1 = Room(
+    'Street',
+    'Suburban houses gradually give way in style to more gothic buildings.',
+    ['east', 'north', 'west'],
+    [1, 5]
+)
+
+willow_house = Room(
+    'house of Willow',
+    'Downstairs it looks like a typical Jewish family home, but upstairs there is a heavy Wicca influence.',
+    ['east', 'north'],
+    [0, 5]
+)
+
+buffy_house = Room(
+    'house of Buffy',
+    'Strange art adorns the walls inside and a thin layer of dust covers the garden.',
+    ['south'],
+    [1, 4]
+)
+
+graveyard = Room(
+    'Graveyard',
+    'Unkempt tombstones protrude from the ground like negelected teeth.',
+    ['east', 'west'],
+    [2, 5]
+)
+
+tomb = Room(
+    'Tomb',
+    'Oil lamps illuminate a small chamber decorated by vases and morbid artefacts.',
+    ['west'],
+    [3, 5]
 )
 
 find_room(1, 0)
