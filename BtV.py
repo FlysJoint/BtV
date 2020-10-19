@@ -280,7 +280,7 @@ buffy_house = Room(
     'house of Buffy',
     'Strange art adorns the walls inside and a thin layer of dust covers the garden.',
     ['south'],
-    [1, 4]
+    [0, 4]
     )
 
 street_2 = Room(
