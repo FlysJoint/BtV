@@ -1,17 +1,27 @@
 #!/usr/bin/python3
 
+import random
+
 # TODO:
-# secret tunnels (going through walls!)
 # random attacks
 # day/night cycle - needs to be every 6 moves instead of every other
 # random spawns
 # combat
 # inventory
 
-map = []
 global current_room
-global moves
-moves = 0
+
+
+class Level(object):
+    moves = 0
+    books = []
+    # current_room 
+
+level = Level()
+
+for book in range(5):
+    level.books.append( [random.randint(0, 4), random.randint(0, 5)] )
+    print(level.books)
 
 class Room(object):
     night = ''
@@ -24,10 +34,8 @@ class Room(object):
         self.tunnels = tunnels
 
     def describe(self):
-        global moves
-        print("\033[H\033[J") 
-        debug()
-        if moves % 2 == 0:
+        print("\033[H\033[J")
+        if level.moves % 2 == 0:
             self.night = ''
         else:
             self.night = ' at night'
@@ -37,15 +45,16 @@ class Room(object):
 
 def prompt():
     print('There are exits: %s' % current_room.exits)
+    print(level.books)
+    if current_room.pos in level.books:
+        print('There is a sigil-covered book here')
     my_action = input('What do you want to do? : ')
     action(my_action)
 
 
 def action(my_action):
     global current_room
-    global moves
-    moves += 1
-    debug()
+    level.moves += 1
     if my_action in current_room.exits:
         print('going %s from %s...' % (my_action, current_room.name))
         if my_action == 'west':
@@ -65,11 +74,8 @@ def action(my_action):
         prompt()
 
 
-def debug():
-    global moves
-    global current_room
-    print('Moves: %s, Pos: %s, Room: %s\n' % (str(moves), str(current_room.pos), current_room.name))
-
+# def debug():
+#     print('Moves: %s, Pos: %s, Room: %s\n' % (str(level.moves), str(current_room.pos), current_room.name))
 
 def find_room(x, y):
     global current_room
@@ -377,5 +383,7 @@ angel_house = Room(
     [4, 5],
     ['east', 0, 2]
     )
+
+
 
 find_room(1, 0)
