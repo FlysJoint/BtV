@@ -10,6 +10,8 @@ import random
 # inventory
 
 global current_room
+global book_limit
+book_limit = 5
 
 
 class Level(object):
@@ -47,7 +49,7 @@ class Room(object):
 
 def prompt():
     print('There are exits: %s' % current_room.exits)
-    print(level.books)
+    # print(level.books)
     if current_room.pos in level.books:
         print('There is a sigil-covered book here')
     my_action = input('What do you want to do? : ')
@@ -56,6 +58,7 @@ def prompt():
 
 def action(my_action):
     global current_room
+    global book_limit
     level.moves += 1
     if my_action in current_room.exits:
         print('going %s from %s...' % (my_action, current_room.name))
@@ -74,13 +77,24 @@ def action(my_action):
         level.inventory.append('book')
         level.books.remove(current_room.pos)
         prompt()
+    elif my_action == 'perform ritual':
+        if level.inventory.count('book') < book_limit:
+            print('You do not have enough books for the ritual!')
+            prompt()
+        elif current_room.name != 'Library':
+            print('You can only perform the ritual in the Library')
+            prompt()
+        else:
+            print("\033[H\033[J")
+            print('You place the books at the five points of a pentagram.\nWillow, Xander, Giles, Cordelia and Oz read from the books and the demon is momentarily mortal.\nYou lop its head off and the body melts to nothing. Cordelia says "Ew".\nYou have successfully vanquished the demon and Sunnydale is safe.')
+            print('\nFor now')
     elif my_action == 'inventory':
         print(level.inventory)
         prompt()
     elif my_action == 'quit':
         print('You run away, leaving the innocent people of Sunnydale to fend for themselves. They all die.')
     else:
-        print('That is not a valid direction')
+        print('That is not a valid action')
         prompt()
 
 
@@ -164,7 +178,7 @@ stacks = Room(
 
 library = Room(
     'Library',
-    'Bookcases and bookcases of ancient, arcane texts line the walls.',
+    'Bookcases and bookcases of ancient, arcane texts line the walls.\nThere is a demon here. He looks impervious to harm.\nFind the 5 magical books located throughout Sunnydale in order to destroy him.',
     ['west', 'south'],
     [1, 0],
     []
@@ -395,5 +409,5 @@ angel_house = Room(
     )
 
 
-spawn_books(5)
+spawn_books(book_limit)
 find_room(1, 0)
