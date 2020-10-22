@@ -15,13 +15,15 @@ global current_room
 class Level(object):
     moves = 0
     books = []
+    inventory = []
     # current_room 
 
 level = Level()
 
-for book in range(5):
-    level.books.append( [random.randint(0, 4), random.randint(0, 5)] )
-    print(level.books)
+def spawn_books(num):
+    for book in range(num):
+        level.books.append( [random.randint(0, 4), random.randint(0, 5)] )
+        print(level.books)
 
 class Room(object):
     night = ''
@@ -67,6 +69,14 @@ def action(my_action):
             find_room(current_room.pos[0], current_room.pos[1] + 1)
     elif my_action in current_room.tunnels:
         find_room(current_room.tunnels[1], current_room.tunnels[2])
+    elif my_action == 'take book' and current_room.pos in level.books:
+        print('You take the book.')
+        level.inventory.append('book')
+        level.books.remove(current_room.pos)
+        prompt()
+    elif my_action == 'inventory':
+        print(level.inventory)
+        prompt()
     elif my_action == 'quit':
         print('You run away, leaving the innocent people of Sunnydale to fend for themselves. They all die.')
     else:
@@ -385,5 +395,5 @@ angel_house = Room(
     )
 
 
-
+spawn_books(5)
 find_room(1, 0)
