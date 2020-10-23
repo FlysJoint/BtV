@@ -5,14 +5,13 @@ import random
 # TODO:
 # random attacks
 # day/night cycle - needs to be every 6 moves instead of every other
-# random spawns
 # combat
-# inventory
 
 global current_room
 global book_limit
 book_limit = 5
-
+global v_chance
+v_chance = 0
 
 class Level(object):
     moves = 0
@@ -46,14 +45,27 @@ class Room(object):
         print('You are in the %s%s. %s' % (self.name, self.night, self.description))
         prompt()
 
-
 def prompt():
     print('There are exits: %s' % current_room.exits)
     # print(level.books)
     if current_room.pos in level.books:
         print('There is a sigil-covered book here')
+    vampire_check()
     my_action = input('What do you want to do? : ')
     action(my_action)
+
+def vampire_check():
+    global v_chance
+    night_multi = 1
+    if current_room.night != '':
+        night_multi *= 2
+
+    if v_chance * night_multi < random.randint(0, 10):
+        v_chance += 1
+    else:
+        v_chance = 0
+        print('From the shadows a vampire attacks!')
+
 
 
 def action(my_action):
@@ -88,6 +100,7 @@ def action(my_action):
             print("\033[H\033[J")
             print('You place the books at the five points of a pentagram.\nWillow, Xander, Giles, Cordelia and Oz read from the books and the demon is momentarily mortal.\nYou lop its head off and the body melts to nothing. Cordelia says "Ew".\nYou have successfully vanquished the demon and Sunnydale is safe.')
             print('\nFor now')
+            print('\n')
     elif my_action == 'inventory':
         print(level.inventory)
         prompt()
@@ -96,10 +109,6 @@ def action(my_action):
     else:
         print('That is not a valid action')
         prompt()
-
-
-# def debug():
-#     print('Moves: %s, Pos: %s, Room: %s\n' % (str(level.moves), str(current_room.pos), current_room.name))
 
 def find_room(x, y):
     global current_room
