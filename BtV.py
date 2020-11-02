@@ -3,7 +3,6 @@
 import random
 
 # TODO:
-# random attacks
 # day/night cycle - needs to be every 6 moves instead of every other
 # combat
 
@@ -16,7 +15,7 @@ v_chance = 0
 class Level(object):
     moves = 0
     books = []
-    inventory = []
+    inventory = ['stake', 'stake', 'stake']
     # current_room 
 
 level = Level()
@@ -47,7 +46,6 @@ class Room(object):
 
 def prompt():
     print('There are exits: %s' % current_room.exits)
-    # print(level.books)
     if current_room.pos in level.books:
         print('There is a sigil-covered book here')
     vampire_check()
@@ -65,6 +63,7 @@ def vampire_check():
     else:
         v_chance = 0
         print('From the shadows a vampire attacks!')
+        
 
 
 
